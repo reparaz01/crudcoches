@@ -28,7 +28,7 @@ export default class HomeDepartamentos extends Component {
   render() {
     return (
       <div>
-        <h1> Lista de Coches </h1>
+        <h2> Lista de Coches </h2>
         <table className='table table-dark'>
           <thead>
             <tr>

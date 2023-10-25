@@ -20,12 +20,12 @@ export default class ModificarCoche extends Component {
     cajaImagen = React.createRef();
  
     findCoche = () => {
-        var request = "api/coches/findcoche" + this.props.idCoche;
+        var request = "api/coches/findcoche/" + this.props.idCoche;
         var url = Global.apiCoches +  request;
         axios.get(url).then(response => {
             this.setState({
                 statusGet : true,
-                departamento :response.data
+                coche :response.data
             })
         })
     }
@@ -52,7 +52,7 @@ export default class ModificarCoche extends Component {
         }
         
         var request = "api/coches/updatecoche"
-        var url = Global.apiDepartamentos +  request;
+        var url = Global.apiCoches +  request;
 
         axios.put(url,data).then(response => {
             this.setState({
@@ -66,7 +66,7 @@ export default class ModificarCoche extends Component {
       <div>
 
         <NavLink to ="/"> Volver </NavLink>
-        <h1> Actualizar Departamento {this.props.iddepartamento} </h1>
+        <h1> Actualizar Coche {this.props.idCoche} </h1>
 
         {
             this.state.statusUpdate == true &&
@@ -79,16 +79,22 @@ export default class ModificarCoche extends Component {
         {
             this.state.statusGet == true &&
             (
-                <form style={{width:"500px",margin: "0 auto"}}>
-                    <input type="hidden"  className="form-control" value = {this.state.departamento.numero} ref={this.cajaNumero}/>
-                    <label>Nombre</label>
-                    <input type = "text" className="form-control" defaultValue  = {this.state.departamento.nombre} ref={this.cajaNombre}/>
-                    <label>Localidad</label>
-                    <input type = "text" className="form-control" defaultValue = {this.state.departamento.localidad} ref={this.cajaLocalidad}/> <br></br>
-                    <button onClick={ this.updateDepartamento} className ="btn btn-primary">
+                <form style={{ width: "500px", margin: "0", textAlign: "left", paddingLeft: "20px" }}>
+                    <input type="hidden" className="form-control" value={this.state.coche.idCoche} ref={this.cajaId} />
+                    <label>Marca</label>
+                    <input type="text" className="form-control" defaultValue={this.state.coche.marca} ref={this.cajaMarca} />
+                    <label>Modelo</label>
+                    <input type="text" className="form-control" defaultValue={this.state.coche.modelo} ref={this.cajaModelo} />
+                    <label>Conductor</label>
+                    <input type="text" className="form-control" defaultValue={this.state.coche.conductor} ref={this.cajaConductor} />
+                    <label>Imagen</label>
+                    <input type="text" className="form-control" defaultValue={this.state.coche.imagen} ref={this.cajaImagen} />
+                    <br></br>
+                    <button onClick={this.updateCoche} className="btn btn-primary">
                         Modificar
                     </button>
                 </form>
+
 
             )
         }
